@@ -1,0 +1,7 @@
+# Project-owned setup environments and dependency probes.
+.venv/
+.phase0/
+
+# Python-generated caches.
+__pycache__/
+*.py[cod]
