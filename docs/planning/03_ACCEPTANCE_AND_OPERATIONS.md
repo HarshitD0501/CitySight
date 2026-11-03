@@ -43,7 +43,7 @@ A frontend artifact request has a visible loading state and 10-second timeout; u
 
 ## Local build and recovery
 
-D3 documents training/scoring/export commands. D4 documents locked frontend install, lint/type/build and serving its exported `out/` directory over localhost HTTP (not `file://`). Bind the demo server to loopback by default. Use a neutral background plus supplied polygons with no remote fonts/tiles; the offline table is always available.
+D3 documents training/scoring/export commands. D4 documents locked frontend install, lint/type/build and serving its exported `out/` directory over localhost HTTP (not `file://`). Bind the demo server to loopback by default. Under the corrected 2026-11-04 ADR-03/08 amendment, Cesium renders a default 3D globe and Leaflet is the 2D fallback. The pinned Cesium CDN script, stylesheet and engine workers/assets require internet for uncached startup; integrity/download/WebGL failures select Leaflet. Street tiles require internet; Leaflet Streets off and tile failure retain local polygons and values. In 3D, imagery failure retains the globe and local overlays. Keep OSM attribution visible on both renderers, preserve browser caching/Referer and never prefetch tiles for offline use. Verify both renderers against shared filters, selection and challenge values. The local table remains available throughout 3D startup/recovery.
 
 Retain the last verified exported build and its manifest locally. If new assets fail schema or hash checks, retain the old build, fix the exporter, then regenerate the complete run. Do not manually edit prediction JSON to hide a bug. Rebuild after model/data/coverage changes. A screen recording is accepted as a fallback by the guide, but does not establish new runtime verification.
 

@@ -38,9 +38,9 @@ Implement guide-mandated entry points using the selected method and shared libra
 
 ## Phase 4 / D4 — Accessible offline frontend
 
-**Prerequisite:** D3 PASS and new continue. **Ownership:** `frontend/app/`, `frontend/components/`, `frontend/lib/`, local CSS and frontend tests/package lock. No paid basemap, web backend, account system, 3D, allocation simulator or interval feature.
+**Prerequisite:** D3 PASS and new continue. **Ownership:** `frontend/app/`, `frontend/components/`, `frontend/lib/`, local CSS and frontend tests/package lock. The later explicit user request authorizes Cesium 3D under amended ADR-03/08, with Leaflet fallback. No paid basemap, web backend, account system, allocation simulator or interval feature.
 
-Implement the static Next.js page, validated manifest loader and artifact parsing, MapLibre client lifecycle, month/category filters, stable selection details, searchable table and reserved-ward challenge. Separate measured observations from model estimates in labels and legend. Map exceptions must leave the table reachable. Use the neutral local style, system fonts, keyboard controls, visible focus, semantic forms/table, responsive layout and reduced-motion behavior.
+Implement the static Next.js page, validated manifest loader and artifact parsing, Cesium default globe and Leaflet fallback lifecycles, month/category filters, stable selection details, searchable table and reserved-ward challenge. The 2026-11-04 corrected ADR-03/08 amendment defines the pinned online engine, optional OSM context, real tilt/top/globe cameras and fullscreen. Separate observations from estimates. Engine/WebGL failures select the 2D map; imagery failures preserve local polygons; geometry/map exceptions leave the table reachable. Use system fonts, keyboard controls, visible focus, responsive layout and reduced-motion behavior.
 
 **Gate:** lint/types/build pass for chosen versions; browser checks cover filter/detail equality, no-data, partial coverage labels, challenge subset/full metrics, missing/corrupt artifacts, timeout/retry, no WebGL and offline cold load from local HTTP. Record commands, browser and results; if browser unavailable, do not call the UI verified. **Rollback:** revert D4 edits or retain known-good exported build. **Stop:** show unresolved UI defects and wait.
 

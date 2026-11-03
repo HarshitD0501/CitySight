@@ -5,6 +5,7 @@ artifacts/
 models/
 frontend/public/data/
 frontend/node_modules/
+frontend/.dependency-cache/
 frontend/.next/
 frontend/out/
 frontend/*.tsbuildinfo

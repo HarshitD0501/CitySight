@@ -1,6 +1,6 @@
 # CitySight — Ward Pulse Demand Predictor & Civic Map
 
-CitySight is an offline municipal demand estimator and interactive geospatial visualization tool built for the Ward Pulse (P3) civic challenge. The system enables city corporations to allocate municipal field crews, contractor resources, and maintenance budgets across newly onboarded wards before historical digital complaint records exist.
+CitySight is an offline municipal demand estimator and interactive geospatial visualization tool built for the Ward Pulse (P3) civic challenge. Its Cesium 3D globe and Leaflet 2D map overlay original dataset ward boundaries on OpenStreetMap context. The 3D engine needs internet/WebGL; a local Leaflet ward-only fallback preserves the data view. Its estimates support investigation of reported civic demand in wards without public complaint history.
 
 ---
 
@@ -50,7 +50,7 @@ The dataset consists of ward-level civic grievances, administrative attributes, 
 
 The CitySight engineering team consists of dedicated engineers responsible for civic analytics, ML architecture, pipeline validation, and user interface development:
 - **Lead ML & Systems Engineer**: Core offline scoring CLI implementation, scikit-learn model architecture, spatial cross-validation design, and test automation.
-- **Geospatial & Frontend Engineer**: MapLibre vector visualization, offline static export contracts, accessible user interface engineering, and data integrity audits.
+- **Geospatial & Frontend Engineer**: Cesium 3D/Leaflet 2D ward visualization with OpenStreetMap context, local static export contracts, accessible user interface engineering, and data integrity audits.
 
 ---
 

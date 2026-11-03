@@ -81,6 +81,41 @@ a { color: inherit; }
 .map-unavailable strong { margin-top: 8px; color: #30483a; font: 500 21px Georgia, serif; }
 .map-unavailable p { max-width: 310px; font-size: 11px; line-height: 1.6; }
 .map-canvas { width: 100%; height: 100%; }
+.map-view-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.map-view-bar > span { color: var(--muted); font-size: 9px; }
+.map-view-switch { display: flex; gap: 4px; }
+.map-view-switch button { border: 1px solid var(--line); padding: 8px 12px; background: #fff; cursor: pointer; font-size: 11px; border-radius: 3px; }
+.map-view-switch button[aria-pressed="true"] { color: #fff; background: var(--green-deep); border-color: var(--green-deep); }
+.globe-recovery { margin: 0; padding: 10px 12px; background: #fff5e9; color: #704623; font-size: 11px; line-height: 1.5; }
+.globe-frame { background: #07131f; height: clamp(440px, 44vw, 590px); }
+.globe-frame:fullscreen { width: 100vw; height: 100vh; }
+.globe-canvas, .globe-canvas .cesium-viewer, .globe-canvas .cesium-viewer-cesiumWidgetContainer, .globe-canvas .cesium-widget { width: 100%; height: 100%; }
+.globe-canvas .cesium-widget canvas { display: block; width: 100%; height: 100%; }
+.globe-tools { position: absolute; z-index: 2; top: 12px; left: 12px; right: 12px; display: flex; flex-wrap: wrap; gap: 5px; }
+.globe-tools button { color: #e6f5ef; background: #0d2936ed; border: 1px solid #5a847b; border-radius: 3px; padding: 8px 10px; min-height: 35px; cursor: pointer; font-size: 11px; }
+.globe-tools button:disabled { opacity: .55; cursor: wait; }
+.globe-caption { position: absolute; left: 14px; bottom: 36px; z-index: 1; max-width: calc(100% - 28px); color: #c8e8da; background: #081c29e8; padding: 8px 10px; border-left: 2px solid #78bda4; font: 10px/1.6 "Courier New", monospace; letter-spacing: .06em; pointer-events: none; }
+.globe-caption span, .globe-caption small { display: block; letter-spacing: 0; font: 10px/1.6 "Segoe UI", sans-serif; }
+.globe-caption small { color: #a4bdb4; }
+.globe-loading { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 12px; padding: 20px; color: #e0f3eb; background: #07131f; text-align: center; }
+.globe-loading span { max-width: 330px; font-size: 12px; line-height: 1.6; color: #b9d4c8; }
+.globe-notice { position: absolute; top: 100px; left: 12px; right: 12px; padding: 9px; color: #fff1d5; background: #45351de8; z-index: 2; font-size: 11px; line-height: 1.5; }
+.globe-canvas .cesium-viewer-bottom { max-width: 100%; }
+.globe-attribution { position: absolute; bottom: 5px; right: 6px; z-index: 2; padding: 3px 5px; color: #dceee6; background: #102b36ed; font-size: 9px; }
+.leaflet-frame .map-canvas { z-index: 0; font-family: inherit; }
+.leaflet-frame:fullscreen { width: 100vw; height: 100vh; background: var(--paper); }
+.map-tools { position: absolute; z-index: 500; top: 12px; right: 12px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 5px; max-width: calc(100% - 65px); }
+.map-tools button { min-height: 36px; padding: 7px 10px; border: 1px solid #bccdc2; border-radius: 4px; background: #fff; box-shadow: 0 2px 7px #17251f1a; cursor: pointer; font-size: 11px; font-weight: 650; }
+.map-tools button[aria-pressed="true"] { background: var(--green-deep); color: white; border-color: var(--green-deep); }
+.map-tools button:disabled { opacity: .6; cursor: wait; }
+.map-orientation { position: absolute; z-index: 400; left: 15px; top: 95px; display: grid; justify-items: center; color: #244a3a; font: 700 10px "Segoe UI", sans-serif; pointer-events: none; }
+.map-orientation span { font-size: 30px; line-height: 1; text-shadow: 0 1px 2px white; }
+.map-loading { position: absolute; z-index: 500; inset: 45% 20px auto; text-align: center; color: var(--muted); font-size: 13px; }
+.leaflet-frame .map-fallback { z-index: 500; top: 66px; right: 12px; }
+.leaflet-frame .map-credit { z-index: 400; left: 8px; bottom: 27px; max-width: calc(100% - 16px); }
+.leaflet-frame .leaflet-control-attribution { font-size: 10px; max-width: calc(100vw - 30px); }
+.leaflet-frame .leaflet-control-attribution a { color: #155742; }
+.leaflet-frame .leaflet-container:focus-visible { outline: 3px solid var(--orange); outline-offset: -3px; }
 .map-canvas canvas { outline: none; }
 .map-fallback { position: absolute; inset: 12px 12px auto auto; display: flex; gap: 8px; align-items: center; max-width: 310px; padding: 10px 12px; border: 1px solid #e3c1af; background: #fffaf6; color: #6f422f; font-size: 11px; line-height: 1.4; box-shadow: 0 3px 12px rgb(40 40 30 / 8%); }
 .map-fallback p { margin: 0; }

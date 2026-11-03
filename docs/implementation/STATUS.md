@@ -5,6 +5,8 @@
 **Completed Phases:** D0, D1, D2, D3, D4, and D5 (All Phases Completed)
 **Last Explicit Continuation Checkpoint:** All implementation phases (D0–D5) and the acceptance matrix (A01–A18) are completed and verified for local release. External competition submission gates remain documented separately.
 
+**Latest authorized refinement (2026-11-04):** User clarified the actual God's Eye View repository and authorized Cesium implementation. Default CesiumJS 1.146.0 globe now shares original ward geometry/values with Leaflet 1.9.4 fallback. Core 3D refinement PASS; photorealistic provider data is unconfigured. See the latest verification below. This direct feature request does not authorize deployment or official submission.
+
 ---
 
 ## 1. Phase Ledger
@@ -240,3 +242,44 @@ This audit does not authorize or execute a new implementation phase. Earlier pha
 - Still open: default PATH Python/pip and launcher, virtual-environment pin mismatch, external organizer/data-rights confirmations and documented model limitations. Git configuration warnings reproduce in this sandbox. Machine-readable challenge provenance needs a reuse caveat; `evaluated_once` is not proof of a fresh blind test. A favicon 404 and the unrelated parent-lockfile build warning remain nonblocking.
 
 No deployment or official submission was performed. Full accessibility certification and a clean dependency reinstall remain unverified. All issues cannot be marked resolved.
+
+## Leaflet/OpenStreetMap map refinement — 2026-11-04
+
+Authorization: user requested OpenStreetMap and Leaflet, with a bird’s-eye overview. Updated ADR-03/08 and D4 operations to distinguish optional online street context from offline scoring and local ward data.
+
+Implementation: `frontend/components/WardMap.tsx` dynamically loads Leaflet, draws original GeoJSON, maintains selection/filter styles without rebuilding the map, displays safe text tooltips, provides zoom/reset/street toggles, scale/north indicators and fullscreen 2D overview. Tile errors automatically remove the background and preserve local ward interaction. CSS is bundled locally; original data is unchanged. Removed MapLibre runtime dependency and its WebGL/worker requirement. Updated palette tests, frontend README and root README.
+
+Dependencies: Leaflet 1.9.4, @types/leaflet 1.9.22; existing Next/React/TypeScript pins unchanged. ESLint 9.39.5 resolves the prior incompatible ESLint 10 / import-plugin peer tree. `npm ls --all --omit=optional --parseable` exited 0. The npm deprecation/support warning remains ISSUE-19. External npm access was blocked; installation succeeded using existing integrity-checked npm cache contents through a temporary loopback registry. Canonical npm URLs and integrity values are retained in the lockfile; no helper is required by the application. No clean npm ci or global change was performed.
+
+Fresh checks: `npm run lint`, `npm run typecheck`, `npm run verify:assets`, `npm run build` all PASS. Source-to-built geometry comparison PASS for all 198 ward shapes. The Python/model code was not changed; the Python suite was not rerun for this frontend-only refinement.
+
+Browser checks against the generated static export:
+- All 198 SVG polygons and visible OSM tiles loaded successfully; copyright attribution visible.
+- Selecting ward #11 showed 46 recorded electrical complaints in January 2024; switching to June 2025/Roads updated to 6. Selection outline retained, zoom increased 11 to 12, reset restored all-ward extent.
+- Streets off removed tiles and retained all polygons; forced tile error automatically selected the local mode and retained all 198 table rows.
+- Fullscreen entered successfully; Exit fullscreen restored the page. The automated Escape keystroke did not demonstrate an exit, so Escape was not counted as independently verified.
+- Narrow browser viewport measured 502 CSS pixels with no horizontal overflow; controls remained available. This was not a real-device test.
+- Challenge mode retained 198 ward outlines and coloured only the 12 reserved wards; coverage counts 12/186/0 matched.
+- Desktop screenshot visually reviewed: street labels, translucent ward overlay, zoom/reset controls and attribution visible. No map runtime error remained after normal reload. A favicon 404 persists.
+
+No data was published or deployed. Remaining: ISSUE-19 lint-tool support maintenance, parent-lockfile warning, favicon 404, clean-install and full accessibility checks, plus existing external/environment limitations. OSM street context requires internet; the local ward map/table do not. This completes only the requested map refinement.
+
+## Cesium 3D globe refinement — 2026-11-04
+
+Authorization: after linking the actual God's Eye View project, user said `kro`. Implemented a CitySight-specific Cesium renderer alongside the working Leaflet map. The external project's viewer/package/provider code was inspected as an architecture reference; no unrelated aircraft, cameras, satellite or voice modules were copied.
+
+Files: `components/WardMap.tsx` selects the default 3D view or 2D recovery; prior Leaflet implementation moved to `LeafletWardMap.tsx`; `GlobeWardMap.tsx` owns React lifecycle/fullscreen/controls; `lib/cesiumGlobe.ts` owns the narrow version-pinned SDK adapter, GeoJSON entities, picking, camera, styling and disposal; `globeView.ts` derives geographic target/range. Updated global styles, syntax/asset/coordinate checks, README, ADRs, D4 scope and operations.
+
+Engine: official Cesium CDN release path 1.146, runtime version 1.146.0. Browser downloads of JS (6,080,574 bytes) and CSS (30,710 bytes) returned 200; their SHA-384 integrity values are pinned in source. Worker/assets resolve against the same release. No npm dependencies installed for 3D, default ion token cleared, default ion base layer disabled. Ellipsoid + OSM is keyless. Request-render mode/30 FPS cap configured, not benchmarked. Photorealistic buildings, measured terrain, credentials, provider terms and local coverage remain unconfigured/unverified. No deployment or official submission.
+
+Fresh verification: lint, typecheck, asset/coordinate regressions and static build passed. Source-derived target is in expected longitude/latitude ranges; malformed/empty geometry rejected. Python/model sources unchanged; Python suite not rerun for this frontend-only refinement.
+
+Browser results:
+- Real Cesium canvas, 204 polygon entities / 198 unique ward IDs; height zero, source geometry retained. First run's runtime-version mismatch and terrain-outline warning were fixed and rechecked (ISSUE-20/21).
+- Actual scene.pick at projected ward #11 centroid returned ward 11. Pick handler updated details to 46 recorded electrical complaints (January 2024) and material to orange. June 2025/Roads updated the value to 6; same viewer survived filters.
+- Top-down pitch approximately -pi/2, tilt reset and globe camera worked; globe overview visually reviewed. Zoom controls, fullscreen entry/exit and narrow 502px viewport (no horizontal overflow) worked. Real mobile GPU testing was not performed.
+- Challenge mode retained all 198 ward IDs and applied non-missing comparison materials to exactly 12 wards; coverage 12/186/0.
+- Forced context loss destroyed the viewer and selected Leaflet: 198 polygons and 198 table rows. Blocked engine script and missing WebGL also selected Leaflet and preserved the same table. Normal reload recovered 3D. Download timeout branch is configured at 20 seconds, not separately timed in browser.
+- OSM copyright link stays visibly on the globe; Cesium's own credits are preserved. No Google/ion API requests in the keyless test. Favicon 404 remains nonblocking.
+
+Remaining: optional photorealistic provider integration/coverage, uncached 3D network dependency, real device/performance/full accessibility/CSP deployment checks, ISSUE-19 lint support warning, parent-lockfile warning, favicon 404 and earlier external/environment limitations. See `docs/implementation/ISSUES.md`. Core requested 3D visualization is implemented; no unsupported claim of a complete God's Eye View replica or photographic buildings.

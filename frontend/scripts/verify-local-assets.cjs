@@ -9,7 +9,8 @@ const ts = require(process.env.TS_COMPILER_PATH || "typescript");
 const root = path.resolve(__dirname, "..");
 const sources = [
   "app/layout.tsx", "app/page.tsx", "components/Dashboard.tsx",
-  "components/WardMap.tsx", "lib/contracts.ts", "lib/mapStyle.ts", "next.config.ts", "eslint.config.mjs",
+  "components/WardMap.tsx", "components/LeafletWardMap.tsx", "components/GlobeWardMap.tsx",
+  "lib/contracts.ts", "lib/mapStyle.ts", "lib/globeView.ts", "lib/cesiumGlobe.ts", "next.config.ts", "eslint.config.mjs",
 ];
 let syntaxErrors = 0;
 for (const relative of sources) {
@@ -68,16 +69,28 @@ const mapModule = new Module(mapPath, module);
 mapModule._compile(ts.transpileModule(fs.readFileSync(mapPath, "utf8"), {
   compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 },
 }).outputText, mapPath);
-const expression = mapModule.exports.demandColor(100);
-assert.equal(expression.length, 4); // case, condition, missing color, interpolation fallback
-assert.equal(expression[3][0], "interpolate");
-const { validateStyleMin } = require("@maplibre/maplibre-gl-style-spec");
-const styleErrors = validateStyleMin({
-  version: 8,
-  sources: { wards: { type: "geojson", data: { type: "FeatureCollection", features: [] } } },
-  layers: [{ id: "ward-fills", type: "fill", source: "wards", paint: { "fill-color": expression } }],
-});
-assert.deepEqual(styleErrors.map((error) => error.message), [], "MapLibre must accept the fill-color expression");
+const { demandColor, wardStyle } = mapModule.exports;
+assert.equal(demandColor(null, 100), "#d9dfdc");
+assert.equal(demandColor(0, 100), "#d5e6df");
+assert.equal(demandColor(25, 100), "#6ea894");
+assert.equal(demandColor(60, 100), "#14745e");
+assert.equal(demandColor(100, 100), "#064638");
+assert.equal(demandColor(200, 100), "#064638");
+assert.match(demandColor(0, 0), /^#[0-9a-f]{6}$/);
+assert.ok(wardStyle(20, 100, false, true).fillOpacity < wardStyle(20, 100, false, false).fillOpacity);
+assert.ok(wardStyle(20, 100, true, true).weight > wardStyle(20, 100, false, true).weight);
+
+const viewPath = path.join(root, "lib/globeView.ts");
+const viewModule = new Module(viewPath, module);
+viewModule._compile(ts.transpileModule(fs.readFileSync(viewPath, "utf8"), {
+  compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 },
+}).outputText, viewPath);
+const target = viewModule.exports.wardView(checked.geometry);
+assert.ok(target.longitude > 77 && target.longitude < 78, "globe must use source longitude, not latitude");
+assert.ok(target.latitude > 12 && target.latitude < 14);
+assert.ok(target.range >= 25_000 && target.range < 200_000);
+assert.throws(() => viewModule.exports.wardView({ features: [] }), /No ward coordinates/);
+assert.throws(() => viewModule.exports.wardView({ features: [{ geometry: { coordinates: [[Infinity, 10]] } }] }), /Invalid globe coordinate/);
 
 async function verifyFetchFailures() {
   const signal = new AbortController().signal;
