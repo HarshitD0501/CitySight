@@ -1,0 +1,6 @@
+team: chai-and-gradients
+problem: p3
+entry: "python predict.py --data-dir {data_dir} --grid {grid} --output {output}"
+python: "3.11"
+train_cmd: "python train.py --data-dir {data_dir} --out models/"
+

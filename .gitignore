@@ -1,7 +1,16 @@
 # Project-owned setup environments and dependency probes.
 .venv/
 .phase0/
+artifacts/
+models/
+frontend/public/data/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/*.tsbuildinfo
 
-# Python-generated caches.
+# Python-generated caches and temporary files.
 __pycache__/
 *.py[cod]
+*.tmp*
+*.tmp
