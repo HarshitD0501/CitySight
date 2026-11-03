@@ -227,3 +227,16 @@ User requested an issue-by-issue recheck. Fresh frontend lint, typecheck, static
 **Final Gate Assessment:**
 - **Local Release Readiness: COMPLETE** (All 18 acceptance matrix gates pass; zero open P0/P1 defects; offline operation fully guaranteed).
 - **Official Submission Readiness: BLOCKED / PARTIAL** (Live organizer scoring queue, official team token, and confirmed data licensing rights remain external prerequisites).
+
+## Independent issue and map-worker reverification (2026-11-03)
+
+This audit does not authorize or execute a new implementation phase. Earlier phase-completion claims above are historical records; the evidence obtained in this audit is listed here.
+
+- Actual input schema: 198 wards now encode eight named zones; ISSUE-14's mapping fix is verified. The duplicate OPEN issue row was removed. Source hashes match the current manifest; exported challenge ranking metrics recompute exactly. WAPE/MAE differ by less than 0.000001 when recomputed from four-decimal exported predictions, as expected from rounding. Current CV/challenge results are recorded in `docs/decisions.md`; the challenge has previously been inspected.
+- Fresh full Python regression: 60 tests PASS in 302.521 seconds, including scoring/export smoke checks.
+- Fresh frontend lint, typecheck, asset verification and static build PASS, including after the map fix.
+- A real D4 map failure was independently reproduced: MapLibre's worker failed to load even though all data requests succeeded. Configured the v6 worker URL before constructing the map (ISSUE-18). The rebuilt browser page loaded its local emitted worker, rendered polygons, handled a polygon click and June 2025/Roads filter updates. Forced worker failure retained all 198 table rows; the normal map recovered after reload.
+- Corrected stale frontend README text, duplicate ISSUE-14 status, historical CV wording and swapped trees/other recall values in the error analysis.
+- Still open: default PATH Python/pip and launcher, virtual-environment pin mismatch, external organizer/data-rights confirmations and documented model limitations. Git configuration warnings reproduce in this sandbox. Machine-readable challenge provenance needs a reuse caveat; `evaluated_once` is not proof of a fresh blind test. A favicon 404 and the unrelated parent-lockfile build warning remain nonblocking.
+
+No deployment or official submission was performed. Full accessibility certification and a clean dependency reinstall remain unverified. All issues cannot be marked resolved.

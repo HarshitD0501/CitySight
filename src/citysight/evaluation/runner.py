@@ -136,7 +136,9 @@ def evaluate_dataset(dataset: InputDataset, *, challenge_size: int = 12, include
         "selection": {"selected_method": selected, "baseline_method": min(valid_baselines)[1],
                       "candidate_rule": "lower pooled WAPE and wins at least 3/5 folds",
                       "candidate_results": results},
-        "challenge": {"fit_wards": len(development), "evaluated_once": True,
+        "challenge": {"fit_wards": len(development), "evaluated_once": False,
+                      "prior_exposure": True,
+                      "exposure_note": "Re-evaluated post-fix for ISSUE-14; not an unexposed blind test.",
                       "metrics": overall, "category_metrics": per_cat,
                       "predictions": [{"ward_id": w, "month": m, "category_group": c,
                                        "actual_count": a, "predicted_count": p}

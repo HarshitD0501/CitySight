@@ -67,6 +67,8 @@ export default function WardMap({ geometry, values, selectedId, onSelect }: Prop
       try {
         const maplibre = await import("maplibre-gl");
         if (disposed || !container.current) return;
+        // MapLibre v6's worker must be emitted explicitly by the Next.js bundler.
+        maplibre.setWorkerUrl(new URL("maplibre-gl/dist/maplibre-gl-worker.mjs", import.meta.url).toString());
         const initialBounds = coordinateBounds(geometry);
         const center: [number, number] = initialBounds
           ? [(initialBounds[0][0] + initialBounds[1][0]) / 2, (initialBounds[0][1] + initialBounds[1][1]) / 2]

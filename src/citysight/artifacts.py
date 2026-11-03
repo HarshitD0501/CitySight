@@ -140,6 +140,7 @@ def export_artifacts(
             "COV-1 local coverage policy assumes unrecorded complaints are zero counts.",
             "Evaluation focuses on January 2024 - June 2025; June 2025 is potentially partial.",
             "Challenge wards are a deterministic 12-ward proxy split.",
+            "Challenge split was evaluated after prior baseline inspection (ISSUE-14 re-evaluation); measurements represent post-fix re-evaluation rather than an unexposed blind holdout.",
         ],
     }
 

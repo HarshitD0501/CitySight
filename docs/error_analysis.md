@@ -14,7 +14,7 @@ These measured results describe the zone-aware model implemented following the r
 - Cross-validation HGB pooled WAPE: **0.534931** (improved from 0.540276), versus K5 **0.624587** and CM **0.746230**. HGB beat K5 in 4 of 5 folds (Fold 1: 0.576284 vs 0.661989, Fold 2: 0.460562 vs 0.610658, Fold 3: 0.497124 vs 0.624586, Fold 4: 0.480997 vs 0.665047; Fold 5: 0.692559 vs 0.553921).
 - Challenge pooled WAPE: **0.531722**; MAE: **7.441239 complaints per ward-month-category cell**.
 - Mean category Spearman correlation on 18-month ward totals: **0.754701**.
-- Mean top-quarter recall: **0.555556**, with `k=3` out of 12 challenge wards per category (electrical 0.6667, solid_waste 0.3333, roads 0.6667, trees 0.3333, animals_health 0.6667, other 0.6667).
+- Mean top-quarter recall: **0.555556**, with `k=3` out of 12 challenge wards per category (electrical 0.6667, solid_waste 0.3333, roads 0.6667, trees 0.6667, animals_health 0.6667, other 0.3333).
 - Comparison with missing-zone baseline:
   - Missing-zone HGB: CV WAPE 0.540276; Challenge WAPE 0.523879, MAE 7.3315, Spearman 0.7675, Recall 0.6111.
   - Zone-aware HGB: CV WAPE 0.534931; Challenge WAPE 0.531722, MAE 7.4412, Spearman 0.7547, Recall 0.5556.

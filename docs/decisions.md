@@ -23,7 +23,7 @@ Re-evaluation on reserved challenge holdout: WAPE **0.531722**, MAE **7.441239**
 
 The regenerated local details are in ignored `frontend/public/data/metrics.json`, `challenge.json` and `manifest.json`; do not add these files to Git or publish them. The older `artifacts/evaluation.json` predates the ranking correction and must not be used.
 
-The earlier reported Spearman 0.783217 and recall 0.333333 ranked ward totals after combining categories; those values were mislabeled and are superseded. The regenerated report ranks wards within each category and averages the category results. The latest HGB pooled CV WAPE is 0.540276; an earlier run produced 0.540180. The selected method was unchanged. The cause of this small run difference has not been established.
+The earlier reported Spearman 0.783217 and recall 0.333333 ranked ward totals after combining categories; those values were mislabeled and are superseded. The regenerated report ranks wards within each category and averages the category results. Before the zone fix, HGB pooled CV WAPE was 0.540276; an earlier run produced 0.540180. The selected method was unchanged. The cause of this small run difference has not been established.
 
 ## Known interpretation limits
 
